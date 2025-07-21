@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PK Traders - Wholesale Food Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('shopphoto2.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+        nav a {
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #FBBF24; /* amber-400 */
+        }
+        .category-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Spinner for loading animation */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #FBBF24;
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Styles for the product modal */
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+        .modal-container {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 smooth-scroll">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-gray-900 font-display">PK Traders</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-600">Home</a>
+                <a href="#products" class="text-gray-600">Products</a>
+                <a href="#recipe-helper" class="text-gray-600">Recipe Helper</a>
+                <a href="#about" class="text-gray-600">About Us</a>
+                <a href="#contact" class="text-gray-600">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden flex items-center">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#home" class="block px-6 py-2 text-sm text-gray-700">Home</a>
+            <a href="#products" class="block px-6 py-2 text-sm text-gray-700">Products</a>
+            <a href="#recipe-helper" class="block px-6 py-2 text-sm text-gray-700">Recipe Helper</a>
+            <a href="#about" class="block px-6 py-2 text-sm text-gray-700">About Us</a>
+            <a href="#contact" class="block px-6 py-2 text-sm text-gray-700">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-bg h-[60vh] md:h-[80vh] flex items-center justify-center text-white">
+            <div class="text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-bold font-display mb-4">Your Trusted Partner in Wholesale Foods</h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">Providing the finest quality dry fruits, spices, grains, and more to businesses across the region.</p>
+                <a href="#products" class="mt-8 inline-block bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300">Explore Our Products</a>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 font-display">Our Product Range</h2>
+                <p class="text-center text-gray-600 mb-12">Click on a category to view our products.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Category Card 1: Dry Fruits & Nuts -->
+                    <div class="category-card bg-gray-50 rounded-lg overflow-hidden shadow-lg" data-category="dry-fruits">
+                        <img src="cashews.jpeg" alt="Dry Fruits & Nuts" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Dry Fruits & Nuts</h3>
+                            <p class="text-gray-600">Premium cashews, black raisins, dried figs, and a variety of mixed dry fruits.</p>
+                        </div>
+                    </div>
+                    <!-- Category Card 2: Spices & Staples -->
+                    <div class="category-card bg-gray-50 rounded-lg overflow-hidden shadow-lg" data-category="spices">
+                        <img src="chillipowder.jpeg" alt="Spices & Staples" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Spices & Staples</h3>
+                            <p class="text-gray-600">Aromatic chili powder, jeera, pure jaggery, salt, and quality sunflower oil.</p>
+                        </div>
+                    </div>
+                    <!-- Category Card 3: Sauces & Pickles -->
+                    <div class="category-card bg-gray-50 rounded-lg overflow-hidden shadow-lg" data-category="sauces">
+                        <img src="mangopickle.jpeg" alt="Sauces & Pickles" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Sauces & Pickles</h3>
+                            <p class="text-gray-600">Delicious mango pickle, ketchup, various chili sauces, soy sauce, and pastes.</p>
+                        </div>
+                    </div>
+                    <!-- Category Card 4: Grains & Beverages -->
+                    <div class="category-card bg-gray-50 rounded-lg overflow-hidden shadow-lg" data-category="grains">
+                        <img src="noodles.jpeg" alt="Grains & Beverages" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Grains & Beverages</h3>
+                            <p class="text-gray-600">Quality noodles, seviyan for desserts, and a selection of fine teas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gemini Recipe Helper Section -->
+        <section id="recipe-helper" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 font-display">Need a Recipe Idea?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">Enter some of our products (like 'cashews, chili powder, noodles') and our AI-powered helper will suggest a creative recipe for you!</p>
+                <div class="max-w-2xl mx-auto">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="text" id="ingredients-input" placeholder="e.g., cashews, jaggery, tea" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <button id="generate-recipe-btn" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 flex items-center justify-center">
+                            <span id="btn-text">Generate Recipe</span>
+                            <div id="btn-loader" class="spinner hidden ml-2"></div>
+                        </button>
+                    </div>
+                    <div id="recipe-output" class="mt-8 p-6 bg-white rounded-lg shadow-md text-left min-h-[100px] whitespace-pre-wrap">
+                        <p class="text-gray-500">Your recipe suggestion will appear here...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="shopphoto.jpeg" alt="About PK Traders" class="rounded-lg shadow-xl w-full" onerror="this.onerror=null;this.src='https://placehold.co/600x400/6366F1/FFFFFF?text=Image+Error';">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 font-display">Our Story: A Tradition of Quality</h2>
+                    <p class="text-gray-600 mb-4">Founded with a passion for providing high-quality food products, PK Traders has grown from a small local supplier to a trusted wholesale partner for businesses across the region. Our commitment is simple: to source the best products and deliver them with reliability and integrity.</p>
+                    <p class="text-gray-600">We believe in building lasting relationships with our clients, understanding their needs, and contributing to their success. At PK Traders, you're not just a customer; you're a partner.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 font-display">Get In Touch</h2>
+                <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <!-- Contact Form -->
+                        <div class="md:w-1/2">
+                            <h3 class="text-2xl font-bold mb-4">Send us a Message</h3>
+                            <form id="contactForm">
+                                <div class="mb-4">
+                                    <label for="name" class="block text-gray-700 font-bold mb-2">Name</label>
+                                    <input type="text" id="name" name="name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+                                    <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message" class="block text-gray-700 font-bold mb-2">Message</label>
+                                    <textarea id="message" name="message" rows="4" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" required></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300">
+                                    Submit Inquiry
+                                </button>
+                            </form>
+                            <div id="form-feedback" class="mt-4 text-center"></div>
+                        </div>
+                        <!-- Contact Info -->
+                        <div class="md:w-1/2 md:pl-8">
+                            <h3 class="text-2xl font-bold mb-4">Contact Information</h3>
+                            <p class="text-gray-600 mb-4">Feel free to reach out to us directly for any inquiries or to place an order.</p>
+                            <div class="space-y-4">
+                                <p class="flex items-center"><svg class="w-6 h-6 mr-3 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 123 Market Street, Main City, 12345</p>
+                                <p class="flex items-center"><svg class="w-6 h-6 mr-3 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg> +91 98765 43210</p>
+                                <p class="flex items-center"><svg class="w-6 h-6 mr-3 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> contact@pktraders.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="font-display text-xl mb-2">PK Traders</p>
+            <p>&copy; <span id="year"></span> PK Traders. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <!-- Modal Overlay -->
+        <div id="modal-overlay" class="absolute inset-0 bg-black bg-opacity-60 modal-overlay"></div>
+        <!-- Modal Container -->
+        <div id="modal-container" class="relative bg-white rounded-lg shadow-xl w-11/12 md:w-3/4 lg:w-2/3 max-h-[90vh] overflow-y-auto p-6 md:p-8 modal-container opacity-0 transform scale-95">
+            <div class="flex justify-between items-center border-b pb-4 mb-6">
+                <h2 id="modal-title" class="text-3xl font-bold font-display">Category Products</h2>
+                <button id="modal-close-btn" class="text-gray-500 hover:text-gray-800 transition-colors">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="modal-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product items will be injected here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Product Data ---
+        // Image paths are relative to the index.html file.
+        // Make sure the image files are in the same folder as this HTML file.
+        const products = {
+            "dry-fruits": {
+                name: "Dry Fruits & Nuts",
+                items: [
+                    { name: "Cashews", img: "cashews.jpeg" },
+                    { name: "Black Raisins", img: "blackraisins.jpeg" },
+                    { name: "Dried Figs", img: "driedfigs.jpeg" },
+                    { name: "Mixed Dry Fruits", img: "mixeddryfruits.jpeg" },
+                ]
+            },
+            "spices": {
+                name: "Spices & Staples",
+                items: [
+                    { name: "Chilli Powder", img: "chillipowder.jpeg" },
+                    { name: "Jeera", img: "jeera.jpeg" },
+                    { name: "Jaggery", img: "jaggery.jpeg" },
+                    { name: "Salt", img: "salt.jpeg" },
+                    { name: "Sunflower Oil", img: "sunfloweroil.jpeg" },
+                    { name: "Ginger Garlic Paste", img: "gingergarlicpaste.jpeg" },
+                ]
+            },
+            "sauces": {
+                name: "Sauces & Pickles",
+                items: [
+                    { name: "Mango Pickle", img: "mangopickle.jpeg" },
+                    { name: "Ketchup", img: "ketchup.jpeg" },
+                    { name: "Green Chilli Sauce", img: "greenchillisauce.jpeg" },
+                    { name: "Red Chilli Sauce", img: "redchillisauce.jpeg" },
+                    { name: "Soy Sauce", img: "soysauce.jpeg" },
+                    { name: "Vinegar", img: "vinegar.jpeg" },
+                ]
+            },
+            "grains": {
+                name: "Grains & Beverages",
+                items: [
+                    { name: "Noodles", img: "noodles.jpeg" },
+                    { name: "Seviyan", img: "seviyan.jpeg" },
+                    { name: "Tea", img: "tea.jpeg" },
+                    { name: "Rose Water", img: "rosewater.jpeg" },
+                ]
+            }
+        };
+
+        // --- Navigation and Basic UI ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        const contactForm = document.getElementById('contactForm');
+        const feedbackDiv = document.getElementById('form-feedback');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            feedbackDiv.textContent = 'Thank you for your message! We will get back to you shortly.';
+            feedbackDiv.className = 'mt-4 text-center text-green-600 font-semibold';
+            contactForm.reset();
+            setTimeout(() => {
+                feedbackDiv.textContent = '';
+                feedbackDiv.className = 'mt-4 text-center';
+            }, 5000);
+        });
+
+        // --- Product Modal Logic ---
+        const productModal = document.getElementById('product-modal');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalContainer = document.getElementById('modal-container');
+        const modalTitle = document.getElementById('modal-title');
+        const modalGrid = document.getElementById('modal-grid');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const categoryCards = document.querySelectorAll('.category-card');
+
+        function openModal(categoryKey) {
+            const category = products[categoryKey];
+            if (!category) return;
+
+            // Set title
+            modalTitle.textContent = category.name;
+
+            // Clear previous items and populate grid
+            modalGrid.innerHTML = '';
+            category.items.forEach(item => {
+                const productCard = `
+                    <div class="text-center">
+                        <div class="bg-gray-100 rounded-lg overflow-hidden aspect-square flex items-center justify-center">
+                             <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/374151?text=Image+Not+Found';">
+                        </div>
+                        <h4 class="font-semibold mt-2">${item.name}</h4>
+                    </div>
+                `;
+                modalGrid.innerHTML += productCard;
+            });
+
+            // Show modal with animation
+            productModal.classList.remove('hidden');
+            productModal.classList.add('flex');
+            setTimeout(() => {
+                modalOverlay.classList.remove('opacity-0');
+                modalContainer.classList.remove('opacity-0', 'scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalOverlay.classList.add('opacity-0');
+            modalContainer.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                productModal.classList.add('hidden');
+                productModal.classList.remove('flex');
+            }, 300); // Match transition duration
+        }
+
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                openModal(card.dataset.category);
+            });
+        });
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && !productModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+
+        // --- Gemini API Recipe Helper ---
+        const generateBtn = document.getElementById('generate-recipe-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnLoader = document.getElementById('btn-loader');
+        const ingredientsInput = document.getElementById('ingredients-input');
+        const recipeOutput = document.getElementById('recipe-output');
+
+        generateBtn.addEventListener('click', async () => {
+            const ingredients = ingredientsInput.value.trim();
+            if (!ingredients) {
+                recipeOutput.innerHTML = '<p class="text-red-500">Please enter some ingredients first.</p>';
+                return;
+            }
+
+            btnText.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+            generateBtn.disabled = true;
+            recipeOutput.innerHTML = '<p class="text-gray-500">Generating your recipe...</p>';
+
+            const prompt = `You are a helpful chef for PK Traders, a wholesale food supplier. Based on the following ingredients, create a simple and delicious recipe. The ingredients are: ${ingredients}. The products available at the store include dry fruits, nuts, various spices like chili powder and jeera, staples like jaggery and oil, sauces like ketchup and chili sauce, pickles, noodles, and tea. Format the recipe with a catchy title, a short description, a list of ingredients, and step-by-step instructions.`;
+            
+            const apiKey = ""; // API key is handled by the environment
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [{ text: prompt }]
+                }]
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const recipeText = result.candidates[0].content.parts[0].text;
+                    recipeOutput.textContent = recipeText;
+                } else {
+                    throw new Error("No valid content received from the API.");
+                }
+
+            } catch (error) {
+                console.error("Error fetching recipe:", error);
+                recipeOutput.innerHTML = `<p class="text-red-500">Sorry, we couldn't generate a recipe at this time. Please check the console for more details or try again later.</p>`;
+            } finally {
+                btnText.classList.remove('hidden');
+                btnLoader.classList.add('hidden');
+                generateBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
